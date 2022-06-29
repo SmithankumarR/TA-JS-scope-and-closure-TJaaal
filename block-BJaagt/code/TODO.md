@@ -21,6 +21,9 @@ The above code will throw an error `Reference Error username is not defined`.
 }
 console.log(useranme); // output
 ```
+In above code we are looking for the variable named `useranme`. There is no variable named `useranme` in the global scope. The variable is inside the  scope and we can't access the variable defined inside a  scope from outside.
+
+The above code will throw an error `Reference Error usernanme is not defined`.
 
 3. Go through the code below and write down the process of making decision about looking for the variable. Also write the output of the code below.
 
@@ -30,6 +33,10 @@ if (true) {
 }
 console.log(useranme); // output
 ```
+In above code we are looking for the variable named `useranme`. There is no variable named `useranme` in the global scope. The variable is inside the block scope and we can't access the variable defined inside a block scope from outside.
+
+The above code will throw an error `Reference Error usernanme is not defined`.
+
 
 4. Go through the code below and write down the process of making decision about looking for the variable. Also write the output of the code below.
 
@@ -39,6 +46,7 @@ if (true) {
 }
 console.log(useranme); // output
 ```
+In above code we are looking for the variable named `usename`. There is no variable named `username` in the global scope. The variable is inside the function named `hello` and we can't access the variable defined inside a function from outside.
 
 5. Go through the code below and write down the process of making decision about looking for the variable. Also write the output of the code below.
 
@@ -49,6 +57,7 @@ if (true) {
 }
 console.log(useranme); // output
 ```
+In above code we are looking for the variable named `usename`. There is no variable named `username` in the global scope. The variable is inside the function named `hello` and we can't access the variable defined inside a function from outside.
 
 6. Go through the code below and write down the process of making decision about looking for the variable. Also write the output of the code below.
 
@@ -59,6 +68,8 @@ if (true) {
 }
 console.log(useranme); // output
 ```
+In above code we are looking for the variable named `usename`. There is no variable named `username` in the global scope. The variable is inside the function named `hello` and we can't access the variable defined inside a function from outside.
+
 
 7. Go through the code below and write down the process of making decision about looking for the variable. Also write the output of the code below.
 
@@ -70,6 +81,7 @@ function sayHello() {
 sayHello();
 console.log(useranme); // output
 ```
+In above code we are looking for the variable named `usename`. There is no variable named `username` in the global scope. The variable is inside the function named `hello` and we can't access the variable defined inside a function from outside.
 
 8. Go through the code below and write down the process of making decision about looking for the variable. Also write the output of the code below.
 
@@ -79,6 +91,7 @@ for (var i = 0; i < 10; i++) {
 }
 console.log(i, 'Second'); // output
 ```
+In above code we are looking for the variable named `usename`. There is no variable named `username` in the global scope. The variable is inside the function named `hello` and we can't access the variable defined inside a function from outside.
 
 9. Go through the code below and write down the process of making decision about looking for the variable. Also write the output of the code below.
 
@@ -88,3 +101,4 @@ for (let i = 0; i < 10; i++) {
 }
 console.log(i, 'Second'); // output
 ```
+In above code we are looking for the variable named `usename`. There is no variable named `username` in the global scope. The variable is inside the function named `hello` and we can't access the variable defined inside a function from outside.
