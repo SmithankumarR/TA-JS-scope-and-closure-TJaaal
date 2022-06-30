@@ -1,17 +1,24 @@
 1. Create a function by your choice that accepts a callback function.
 
 ```js
+function number(cb) {
+  return cb(34);
+}
+number(function squareUp(num) {
+  return num * num;
+});
 ```
 
 2. Create a function by you choice that returns a function reference.
 
 ```js
-function number(n,cb ){
-  return cb(double);
+function number() {
+  function squareUp(num) {
+    return num * num;
+  }
+  return squareUP;
 }
-  let double = (n,db) => n * 2;
-
-
+number();
 ```
 
 3. Create a higher order function called `map` that takes two inputs:
@@ -21,7 +28,14 @@ function number(n,cb ){
 Have `map` return a new array filled with values that are the result of the 'callback' function on each element of the input array.
 
 ```js
-// Your code goes here
+function myMap(arr,cb){
+  let final = [];
+  for(let i = 0; i< arr.length; i++){
+    final.push(cb(arr[i]));
+  }
+  return final;
+}
+
 
 // Test Your Code
 function multiplyByTwo(n) {
@@ -35,8 +49,12 @@ multiplyByTwo(2); //-> 4
 4. Create a higher-order function called `forEach` taht takes an array and a callback, and runs the callback on each element of the array. `forEach` does not return anything.
 
 ```js
-// Your code goes here
-
+function forEach(arr,cb){
+   let final = [];
+  for(let i = 0; i< arr.length; i++){
+    final.push(cb(arr[i]));
+  }
+}
 // Test Your Code
 let alphabet = "";
 let letters = ["a", "b", "c", "d"];
@@ -49,8 +67,19 @@ console.log(alphabet); //prints 'abcd'
 5. Create higher-order function called `filter` takes an array and a callback, and runs the callback on each element of the array if the return value of callback is `truthy` store in new array return the new array.
 
 ```js
-// Test Your Code
+function filter(arr,cb){
+  let newarr = [];
+  for(let elm of arr){
+    if(cb(elm)){
+      newarr.push(elm);
+    }
+  }
+  return newarr;
+}
 
+```
+// Test Your Code
+```js
 var numbers = [1, 3, 5, 4, 7, 89, 234, 20];
 let even = filter(numbers, function (n) {
   return n % 2 === 0;
