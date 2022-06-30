@@ -1,6 +1,18 @@
 1. Create a function by your choice that accepts a callback function.
 
+```js
+```
+
 2. Create a function by you choice that returns a function reference.
+
+```js
+function number(n,cb ){
+  return cb(double);
+}
+  let double = (n,db) => n * 2;
+
+
+```
 
 3. Create a higher order function called `map` that takes two inputs:
    - An array of numbers/string/boolean etc
@@ -26,8 +38,8 @@ multiplyByTwo(2); //-> 4
 // Your code goes here
 
 // Test Your Code
-let alphabet = '';
-let letters = ['a', 'b', 'c', 'd'];
+let alphabet = "";
+let letters = ["a", "b", "c", "d"];
 forEach(letters, function (char) {
   alphabet += char;
 });
