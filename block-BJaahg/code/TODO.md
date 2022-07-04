@@ -77,7 +77,7 @@ const addOne = (num) => {
   return num + 1;
 };
 var two = addOne(1);
-console.log(two);
+console.log(two); // error can't able to access the addOne before initialization
 ```
 ![](../code/img/pic4.png)
 
@@ -90,7 +90,7 @@ const addOne = (num) => {
   return num + 1;
 };
 var two = addOne(1);
-console.log(two);
+console.log(two); // error can't able to access the addOne before initialization
 ```
 ![](../code/img/pic5.png)
 
@@ -164,7 +164,7 @@ console.log(name); //ArayStark
 if (true) {
   var name = "Arya Stark";
 }
-console.log(name);
+console.log(name); // Arya Stark
 ```
 
 14. Guess the output of the code below with a reason.
@@ -173,7 +173,7 @@ console.log(name);
 if (true) {
   let name = "Arya Stark";
 }
-console.log(name); // Arya Stark
+console.log(name); // name is not defined -- error
 ```
 
 15. Guess the output of the code below with a reason.
@@ -358,6 +358,6 @@ const half = (num) => {
 };
 
 let allFunctions = [addOne, subTwo, multiplyThree, addOne, multiplyThree, half];
-
+allFunctions.reduce((acc,cv) => cv(acc),100);
 // Answer is: 447
 ```
