@@ -10,18 +10,10 @@
 **You can use normal for loop for this function**
 
 ```js
-function loop() {
-  return function test() {
-    let i;
-    i > 0;
-    return function body() {
-      console.log(i);
-      return function update() {
-        i--;
-      };
-    };
-  };
-  return i;
+function loop(start, test, update, body) {
+  for (let i = start; test(i); i = update(i)) {
+    body(i);
+  }
 }
 
 loop(
@@ -41,11 +33,11 @@ Here's how it works. The function has an "accumulator value" which starts as the
 
 ```js
 function reduce(array, callback, initialValue) {
-  return function single(acc, cv, i) {
-    acc += cb(array);
-    return acc;
-  };
-  single(array);
+  let accumulator = initialvalue;
+  for(let i =0; i< array.length ; i++){
+   accumulator =  callback(accumulator,array[i]);
+  }
+ return accumulator;
 }
 
 // Test
@@ -59,7 +51,15 @@ reduce(nums, add, 0); //-> 8
 3. Construct a function intersection that compares input arrays and returns a new array with elements found in all of the inputs.
 
 ```js
-function intersection(arrays) {}
+function intersection(...arrays) {
+  // we need to compare the two array
+  let first = arrays[0];
+  for(let i = 0 ; i < arrays.length ; i++){
+    let second = arrays[i];
+   first =  first.filter(elm => second.includes(elm));
+  }
+return first;
+}
 
 // Test
 console.log(
@@ -70,7 +70,15 @@ console.log(
 4. Construct a function `union` that compares input arrays and returns a new array that contains all elements. If there are duplicate elements, only add it once to the new array. Preserve the order of the elements starting from the first element of the first input array.
 
 ```js
-function union(arrays) {}
+function union(...arrays) {
+let first = arrays[0];
+  for(let i = 0 ; i < arrays.length ; i++){
+    let second = arrays[i];
+   first =  first.filter(elm => !second.includes(elm)).concat(second);
+  }
+return first;
+
+}
 
 // Test
 console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
