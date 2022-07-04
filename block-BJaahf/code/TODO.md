@@ -11,7 +11,17 @@
 
 ```js
 function loop() {
-  // Your code goes here
+  return function test() {
+    let i;
+    i > 0;
+    return function body() {
+      console.log(i);
+      return function update() {
+        i--;
+      };
+    };
+  };
+  return i;
 }
 
 loop(
@@ -30,7 +40,13 @@ loop(
 Here's how it works. The function has an "accumulator value" which starts as the `initialValue` and accumulates the output of each loop. The array is iterated over, passing the accumulator and the next array element as arguments to the `callback`. The callback's return value becomes the new accumulator value. The next loop executes with this new accumulator value. In the example above, the accumulator begins at 0. `add(0,4)` is called. The accumulator's value is now 4. Then `add(4, 1)` to make it 5. Finally `add(5, 3)` brings it to 8, which is returned.
 
 ```js
-function reduce(array, callback, initialValue) {}
+function reduce(array, callback, initialValue) {
+  return function single(acc, cv, i) {
+    acc += cb(array);
+    return acc;
+  };
+  single(array);
+}
 
 // Test
 var nums = [4, 1, 3];
@@ -47,11 +63,7 @@ function intersection(arrays) {}
 
 // Test
 console.log(
-  intersection(
-    [5, 10, 15, 20],
-    [15, 88, 1, 5, 7],
-    [1, 10, 15, 5, 20]
-  )
+  intersection([5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20])
 ); // should log: [5, 15]
 ```
 
@@ -61,8 +73,6 @@ console.log(
 function union(arrays) {}
 
 // Test
-console.log(
-  union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5])
-);
+console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
 // should log: [5, 10, 15, 88, 1, 7, 100]
 ```
