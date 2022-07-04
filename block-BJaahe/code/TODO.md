@@ -14,16 +14,12 @@ function outer(string) {
 2. Write a function `delay` that accepts two arguments, a callback and the wait for the time in milliseconds (1000 ms is 1 second). `delay` should return a function that, when invoked waits for the specified amount of time before executing. (Use setTimeout)
 
 ```js
-function delay(cb,wait){
+function delay(cb,ms){
   return function () {
-    setTimeout((){
-
-    },3000);
+    setTimeout(cb , ms);
   }
 }
-
-delay()
-
+let time = delay(() => console.log('heyMan!'),2000)
 ```
 
 3. Write a function with a closure. The first function should only take one argument, someone's last name, and return the inner function. The returned `inner` function should take one more argument, someone's first name. When inner function when called it should console.log both the first name and the last name with a space.
@@ -52,13 +48,14 @@ lastNameLee("Lynne"); //logs 'Lynne Lee'
 ```js
 function storyWriter() {
   var words = "";
-  function adding(str) {}
   return {
-    addWords: function (words) {
+    addWords: function (str) {
       words += str;
+      return words;
     },
-    erase: function (words) {
-      words += " ";
+    erase: function () {
+      words = "";
+      return words;
     },
   };
 }
@@ -80,17 +77,14 @@ storyOfMyLife.erase(); // ''
 When `forEach` function is called it returns another function. When the returned function is called it returns the element from the array at specific index. Every time you call the returned function the value of index should increment.
 
 ```js
-function forEach(next) {
-  var index = 0;
-  return function next(next) {
-    for (let elm of next) {
-      elm;
-    }
-    increment(index++);
+function forEach(arr) {
+  let index = 0;
+  return function() {
+    return arr[index++]
   };
 }
 
-let next = [1, 2, 3, 4, 5];
+let next = forEach([1, 2, 3, 4, 5]);
 next(); // 1
 next(); // 2
 next(); // 3
@@ -126,20 +120,16 @@ manager("Head"); // Head Manager
 
 ```js
 function changeSalary(cur) {
-  let currS = 0;
-  function changeBy(cur) {
-    return (currS += cur);
-  }
-
   return {
-    raise: function () {
-      changeBy(500);
+    raise() {
+      return cur + 500;
     },
-    lower: function () {
-      changeBy(-500);
+    lower() {
+      return cur + 500;
+
     },
-    current: function () {
-      currs = cur;
+    current() {
+      return cur;
     },
   };
 }
@@ -163,10 +153,12 @@ function nameFactory(first, last) {
     getFullName: function () {
       return `${first} ${last} `;
     },
-    setFirstName: function (first) {
-      return `${first} ${last}`;
+    setFirstName: function (fn) {
+      first = fn;
+      return `${fn} ${last}`;
     },
-    setLastName: function (last) {
+    setLastName: function (ln) {
+      last = ln;
       return `${first} ${last}`;
     },
   };
@@ -184,11 +176,12 @@ The returned function accepts a string (children) and returns the children with 
 
 ```js
 function createTag(tag) {
-  return function children(string){
-    return `${string}`
+  return function (child){
+    let elm = document.createElement(tag);
+    elm.innerText =child;
+    return elm;
+    
   }
-  children();
-
 }
 
 let bold = createTag("b");
