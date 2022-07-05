@@ -3,7 +3,23 @@
 1. Construct a function `objOfMatches` that accepts two arrays and a callback. `objOfMatches` will build an object and return it. To build the object, `objOfMatches` will test each element of the first array using the callback to see if the output matches the corresponding element (by index) of the second array. If there is a match, the element from the first array becomes a key in an object, and the element from the second array becomes the corresponding value.
 
 ```js
-function objOfMatches(array1, array2, callback) {}
+function objOfMatches(array1, array2, callback) {
+  for(let i =0 ; i< array1.length; i++ ){
+    callback(i);
+  }
+  for(let j = 0 ; j < array2.length; j++>){
+    callback(j);
+  }
+return {
+    if(i == j){
+      array1[i] = array2[j]
+    }
+
+  }
+}
+
+
+}
 
 // TEST
 console.log(
