@@ -6,8 +6,8 @@ The returned function accepts a sentence. If the sentence contains the `fromWord
 
 ```js
 function censor(fromWord, toWord) {
-  return function(sen) {
-    return sen.includes(fromWord) ? sen.replace(fromWord,toWord) : sen;
+  return function (sen) {
+    return sen.includes(fromWord) ? sen.replace(fromWord, toWord) : sen;
   };
 }
 
@@ -27,13 +27,20 @@ The returned function either accepts two parameter or one parameter.
 
 ```js
 function multipleCensor() {
-  return function (one,Two){
-    return function (onlyOne){
-      let answer = (one&&Two).includes(one&&Two) ? `two parameter o return` : onlyOne;
-      return answer;
+  let words = [];
+  return function (...params) {
+    if (params.length === 1) {
+      let quote = params[0];
+      words.forEach((pair) => {
+        quote = quote.replace(pair[0], pair[1]);
+      });
+      return quote;
+    } else if (params.length === 2) {
+      words.push(params);
+    } else {
+      alert`the number of paramters is invalid`;
     }
-
-  }
+  };
 }
 
 let censorQuote = multipleCensor();
@@ -57,14 +64,16 @@ The returned function accepts one parameter.
 - If the parameter is the same as the password it will return the object in which we stored the values.
 
 ```js
-function createCache(cb,str) {
- return function (pass) {
-  if(pass !== str){
-    return cb(pass);
-  }else{
-    return  Object.assign( pass = cb(pass));
-  }
- }
+function createCache(cb, str) {
+  let obj = {};
+  return function (pass) {
+    if (pass !== str) {
+      obj[pass] = cb(pass);
+      return cb(pass);
+    } else {
+      return obj;
+    }
+  };
 }
 
 function add10(num) {
@@ -83,8 +92,20 @@ addCache("foo"); // {12: 22, 100: 110, 1: 11}
 4. Change the above function in such a way that when the returned function is called with any other value than password. It should first check the object where we are storing the argument and return value. If the key is present return the value form the object itself. Otherwise call the callback function with the parameter.
 
 ```js
-function createCache() {
-  // Your code goes here
+function createCache(cb,str) {
+  let obj = {};
+  return function (pass) {
+    if (pass !== str) {
+      if (obj[pass]) {
+        return obj[pass];
+      } else {
+        obj[pass] = cb(pass);
+        return cb(pass);
+      }
+    } else {
+      return obj;
+    }
+  };
 }
 
 function add10(num) {
