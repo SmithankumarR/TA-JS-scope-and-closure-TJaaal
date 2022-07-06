@@ -6,13 +6,15 @@ The returned function accepts a sentence. If the sentence contains the `fromWord
 
 ```js
 function censor(fromWord, toWord) {
-  //  Your code goes here
+  return function(sen) {
+    return sen.includes(fromWord) ? sen.replace(fromWord,toWord) : sen;
+  };
 }
 
-let censorSentence = censor('World', 'Sam');
-censorSentence('Hello World'); // Hello Sam
+let censorSentence = censor("World", "Sam");
+censorSentence("Hello World"); // Hello Sam
 
-let censorQuote = censor('die', 'live');
+let censorQuote = censor("die", "live");
 censorQuote(`all men must die`); // all men must live
 ```
 
@@ -25,16 +27,22 @@ The returned function either accepts two parameter or one parameter.
 
 ```js
 function multipleCensor() {
-  //  Your code goes here
+  return function (one,Two){
+    return function (onlyOne){
+      let answer = (one&&Two).includes(one&&Two) ? `two parameter o return` : onlyOne;
+      return answer;
+    }
+
+  }
 }
 
 let censorQuote = multipleCensor();
-censorQuote('forget', 'remember'); // two parameter no return
-censorQuote('never', 'always'); // two parameter no return
-censorQuote('hurt you', 'love you'); // two parameter no return
+censorQuote("forget", "remember"); // two parameter no return
+censorQuote("never", "always"); // two parameter no return
+censorQuote("hurt you", "love you"); // two parameter no return
 
 censorQuote(
-  'Never forget what you are. The rest of the world will not. Wear it like armor, and it can never be used to hurt you.'
+  "Never forget what you are. The rest of the world will not. Wear it like armor, and it can never be used to hurt you."
 );
 
 // Returns: "Never remember what you are. The rest of the world will not. Wear it like armor, and it can always be used to love you."
@@ -49,21 +57,27 @@ The returned function accepts one parameter.
 - If the parameter is the same as the password it will return the object in which we stored the values.
 
 ```js
-function createCache() {
-  // Your code goes here
+function createCache(cb,str) {
+ return function (pass) {
+  if(pass !== str){
+    return cb(pass);
+  }else{
+    return  Object.assign( pass = cb(pass));
+  }
+ }
 }
 
 function add10(num) {
   return num + 10;
 }
 
-let addCache = createCache(add10, 'foo');
+let addCache = createCache(add10, "foo");
 
 addCache(12); // 22
 addCache(100); // 110
 addCache(1); // 11
 
-addCache('foo'); // {12: 22, 100: 110, 1: 11}
+addCache("foo"); // {12: 22, 100: 110, 1: 11}
 ```
 
 4. Change the above function in such a way that when the returned function is called with any other value than password. It should first check the object where we are storing the argument and return value. If the key is present return the value form the object itself. Otherwise call the callback function with the parameter.
@@ -77,7 +91,7 @@ function add10(num) {
   return num + 10;
 }
 
-let addCache = createCache(add10, 'foo');
+let addCache = createCache(add10, "foo");
 
 addCache(12); // 22
 addCache(100); // 110
@@ -85,5 +99,5 @@ addCache(100); // 110 (callback should not be called)
 addCache(100); // 110 (callback should not be called)
 addCache(1); // 11
 
-addCache('foo'); // {12: 22, 100: 110, 1: 11}
+addCache("foo"); // {12: 22, 100: 110, 1: 11}
 ```
