@@ -2,16 +2,10 @@
 
 ```js
 function intersection(...arrays) {
-  let first = array[0];
-  for (let i = 0; i < arrays.length; i++) {
-    let second = arrays[i];
-    first = first.filter((elm) => second.includes(elm));
-  }
-  return first;
-}
-
-function intersection(...arrays){
-  
+  return arrays.reduce((acc, cv) => {
+    acc = acc.filter((elm) => cv.includes(elm));
+    return acc;
+  });
 }
 
 // Test
@@ -24,12 +18,10 @@ console.log(
 
 ```js
 function union(...arrays) {
- let first = array[0]
-  for(let i=0; i< arrays.length; i++){
-    let second = arrays[i];
-      first = first.filter(elm => !second.includes(elm)).concat(second);
-  }
-return first;
+  return arrays.reduce((acc, cv) => {
+    acc = acc.filter((elm) => !cv.includes(elm)).concat(cv);
+    return acc;
+  });
 }
 
 // Test
