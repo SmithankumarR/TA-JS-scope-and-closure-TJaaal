@@ -7,6 +7,8 @@ function once(cb) {
     if (!execute) {
       execute = true;
       return cb();
+    } else {
+      alert`can't be called twice`;
     }
   };
 }
@@ -29,6 +31,8 @@ function once(cb, pass) {
     if (!execute) {
       execute = true;
       return cb(pass);
+    } else {
+      alert`can't be called twice`;
     }
   };
 }
@@ -52,6 +56,8 @@ function once(cb, ...pass) {
     if (!execute) {
       execute = true;
       return cb(...pass);
+    } else {
+      alert`can't be called twice`;
     }
   };
 }
@@ -66,13 +72,13 @@ log(); // return undefinde (can't be called twice)
 
 ```js
 function nTimes(cb, times, ...rest) {
-  var execute = false;
+  var numberOfTimes = 0;
   return function () {
-    for (let i = times; i <= times; i++) {
-      if (!execute ) {
-        execute = true;
-        return cb(...rest);
-      } 
+    if (numberOfTimes >= times) {
+      alert`can't be called More than ${times} times`;
+    } else {
+      return cb(...rest);
+       numberOfTimes = numberOfTimes + 1;
     }
   };
 }
